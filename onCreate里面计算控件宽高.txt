@@ -1,0 +1,9 @@
+ViewTreeObserver vto = imageView.getViewTreeObserver(); 
+vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() { 
+    public boolean onPreDraw() { 
+        int height = imageView.getMeasuredHeight(); 
+        int width = imageView.getMeasuredWidth(); 
+        textView.append("\n"+height+","+width); 
+        return true; 
+    } 
+}); 

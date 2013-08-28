@@ -1,0 +1,38 @@
+	//使用系统执行exec命令的最好开启线程
+	/**
+	 * 需要<uses-permission android:name="android.permission.SET_DEBUG_APP"/>
+	 * 权限
+	 */
+	public static void hideSystemStatusBar() {
+		try {
+			Process proc = Runtime.getRuntime().exec("service call activity 42 s16 com.android.systemui");
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+
+			String line;
+			while ((line = bufferedReader.readLine()) != null) {
+				Log.e("IDSPlayer", "RESULTAT BARRA:" + line);
+			}
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 需要<uses-permission android:name="android.permission.SET_DEBUG_APP"/>
+	 * 权限
+	 */
+	public static void showSystemStatusBar() {
+		try {
+			Process proc = Runtime.getRuntime().exec(new String[]{"am","startservice","-n","com.android.systemui/.SystemUIService"});
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+
+			String line;
+			while ((line = bufferedReader.readLine()) != null) {
+				Log.e("IDSPlayer", "RESULTAT BARRA:" + line);
+			}
+			bufferedReader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}

@@ -1,0 +1,4 @@
+int progress = (int) (((float) Math.round(((float) total / (float) fileSize) * 100)));
+					final Message msg = handler.obtainMessage();
+
+total:当前下载量     fileSize：文件总大小

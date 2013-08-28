@@ -1,0 +1,4 @@
+在myAdapter中的getView中获取checkBox的选中状态直接设置就好了。
+   boolean ischeck=(Boolean) dataItem.get(AppManagerActivity.APP_CHECKED);
+
+   viewholder.checkBox.setChecked(ischeck);

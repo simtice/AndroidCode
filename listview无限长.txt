@@ -1,0 +1,1 @@
+重写 listView的onMeasure()方法 加上 int expandSpec = MeasureSpec.makeMeasureSpec(Integet.MAX_VALUE>>2,MeasureSpec.AT_MOST) 这样listView 就有无限长了，不会出现滚动效果，用scrollView 的滚动。

@@ -1,0 +1,23 @@
+InputStream is = this.getResources().openRawResource(R.drawable.pic1); 
+     BitmapFactory.Options options=new BitmapFactory.Options(); 
+     options.inJustDecodeBounds = false; 
+     options.inSampleSize = 10;   //width，hight设为原来的十分一 
+     Bitmap btp =BitmapFactory.decodeStream(is,null,options); 
+2. if(!bmp.isRecycle() ){ 
+         bmp.recycle()   //回收图片所占的内存 
+         system.gc()  //提醒系统及时回收 
+} 
+上面代码与下面代码大家可分开使用，也可有效缓解内存问题哦...吼吼...
+ 
+    /** 这个地方大家别搞混了，为了方便小马把两个贴一起了，使用的时候记得分开使用
+     * 以最省内存的方式读取本地资源的图片 
+     */   
+    public static Bitmap readBitMap(Context context, int resId){   
+        BitmapFactory.Options opt = new BitmapFactory.Options();   
+        opt.inPreferredConfig = Bitmap.Config.RGB_565;    
+       opt.inPurgeable = true;   
+       opt.inInputShareable = true;   
+          //获取资源图片   
+       InputStream is = context.getResources().openRawResource(resId);   
+           return BitmapFactory.decodeStream(is,null,opt);   
+   } 

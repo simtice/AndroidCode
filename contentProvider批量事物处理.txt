@@ -1,0 +1,20 @@
+public void insertAppCoordinate(FlagAppCoordinate appCoordinate) {
+		try {
+			List<Field> flagAppCoordinateFieldList = getClassFieldList(FlagAppCoordinate.class);
+			ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+			Builder builder = ContentProviderOperation.newInsert(CONTENT_URI_APP_COORDINATE);
+			for (Field field : flagAppCoordinateFieldList) {
+				try {
+					DatabaseField databaseField = field.getAnnotation(DatabaseField.class);
+					field.setAccessible(true);
+					builder = builder.withValue(databaseField.columnName(), field.get(appCoordinate));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			ops.add(builder.build());
+			mContext.getContentResolver().applyBatch(AUTHORITY, ops);// 处理事务
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}

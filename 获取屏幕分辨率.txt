@@ -1,0 +1,4 @@
+DisplayMetrics dm = new DisplayMetrics();
+			getWindowManager().getDefaultDisplay().getMetrics(dm);
+			float density = dm.density;
+			int screenHeight = dm.heightPixels;

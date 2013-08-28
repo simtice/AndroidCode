@@ -1,0 +1,1 @@
+在onScrollStateChanged(AbsListView view, int scrollState) 中，scrollState有三种状态，分别是开始滚动（SCROLL_STATE_FLING），正在滚动(SCROLL_STATE_TOUCH_SCROLL), 已经停止（SCROLL_STATE_IDLE）

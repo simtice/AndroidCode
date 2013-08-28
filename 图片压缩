@@ -1,0 +1,36 @@
+public static Bitmap getSmallBitmap(String filePath, int screenWidth,
+			int screenHeight) {
+		final BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inJustDecodeBounds = true;// 可以不把图片读到内存中,但依然可以计算出图片的大小
+		BitmapFactory.decodeFile(filePath, options);
+		options.inSampleSize = calculateInSampleSize(options, screenWidth,
+				screenHeight);
+		options.inJustDecodeBounds = false;
+		return BitmapFactory.decodeFile(filePath, options);
+	}
+
+	/**
+	 * 计算压缩比例 如果图片的原始高度或者宽带大约我们期望的宽带和高度，我们需要计算出缩放比例的数值。否则就不缩放。
+	 * heightRatio是图片原始高度与压缩后高度的倍数
+	 * ，widthRatio是图片原始宽度与压缩后宽度的倍数。inSampleSize为heightRatio与widthRatio中最小的那个
+	 * ，inSampleSize就是缩放值。 inSampleSize为1表示宽度和高度不缩放，为2表示压缩后的宽度与高度为原来的1/2
+	 * 
+	 * @param options
+	 * @param resWidth
+	 * @param resHeight
+	 * @return
+	 */
+	private static int calculateInSampleSize(BitmapFactory.Options options,
+			int resWidth, int resHeight) {
+		int height = options.outHeight;
+		int width = options.outWidth;
+		int inSampleSize = 1;
+
+		if (height > resHeight || width > resWidth) {
+			final int heightRatio = Math.round((float) height
+					/ (float) resHeight);
+			final int widthRatio = Math.round((float) width / (float) resWidth);
+			inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+		}
+		return inSampleSize;
+	}
