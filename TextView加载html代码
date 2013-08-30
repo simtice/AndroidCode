@@ -1,0 +1,2 @@
+Spanned text = Html.fromHtml(String html);
+TextView.setText(text);
