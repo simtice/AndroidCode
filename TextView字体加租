@@ -1,0 +1,2 @@
+textView.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));//加粗
+textView.getPaint().setFakeBoldText(true);//加粗
